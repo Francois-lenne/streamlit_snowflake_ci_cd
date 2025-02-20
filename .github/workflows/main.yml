@@ -61,4 +61,4 @@ jobs:
       - name: Deploy the Streamlit app
         shell: bash
         run: |
-          snow streamlit deploy --replace
+          snow streamlit deploy MY_STREAMLIT_APP --replace
