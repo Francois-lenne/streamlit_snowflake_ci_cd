@@ -8,6 +8,14 @@ on:
 
 env:
   PYTHON_VERSION: '3.8'
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWCLI_ACCOUNT }}
+  SNOWFLAKE_USER: ${{ secrets.SNOWCLI_USER }}
+  SNOWFLAKE_PASSWORD: ${{ secrets.SNOWCLI_PW }}
+  SNOWFLAKE_REGION: "eu-west-1"
+  SNOWFLAKE_WAREHOUSE: "COMPUTE_WH"
+  SNOWFLAKE_DATABASE: "MY_DATABASE"
+  SNOWFLAKE_SCHEMA: "PUBLIC"
+  SNOWFLAKE_ROLE: "ACCOUNTADMIN"
 
 jobs:
   build-and-deploy:
@@ -32,15 +40,22 @@ jobs:
           pip install snowflake-cli
 
       # Create Snowflake config
-      - name: Create config
+      - name: Create SnowSQL config
         shell: bash
-        env:
-          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWCLI_PW }}
         run: |
-          mkdir -p ~/.snowflake
-          cp config.toml ~/.snowflake/config.toml
-          echo "password = \"$SNOWFLAKE_PASSWORD\"" >> ~/.snowflake/config.toml
-          chmod 0600 ~/.snowflake/config.toml
+          mkdir -p ~/.snowsql
+          cat <<EOF > ~/.snowsql/config
+          [connections.default]
+          accountname = "$SNOWFLAKE_ACCOUNT"
+          username = "$SNOWFLAKE_USER"
+          password = "$SNOWFLAKE_PASSWORD"
+          region = "$SNOWFLAKE_REGION"
+          warehouse = "$SNOWFLAKE_WAREHOUSE"
+          database = "$SNOWFLAKE_DATABASE"
+          schema = "$SNOWFLAKE_SCHEMA"
+          role = "$SNOWFLAKE_ROLE"
+          EOF
+          chmod 0600 ~/.snowsql/config
 
       # Deploy the Streamlit app
       - name: Deploy the Streamlit app
