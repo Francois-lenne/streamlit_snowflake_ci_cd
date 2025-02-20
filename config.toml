@@ -1,0 +1,9 @@
+[connections.default]
+accountname = "${SNOWFLAKE_ACCOUNT}"
+username = "${SNOWFLAKE_USER}"
+password = "${SNOWFLAKE_PASSWORD}"
+region = "${SNOWFLAKE_REGION}"
+warehouse = "${SNOWFLAKE_WAREHOUSE}"
+database = "${SNOWFLAKE_DATABASE}"
+schema = "${SNOWFLAKE_SCHEMA}"
+role = "${SNOWFLAKE_ROLE}"
