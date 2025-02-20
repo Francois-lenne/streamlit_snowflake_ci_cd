@@ -42,4 +42,4 @@ build-and-deploy:
     - name: 'Deploy the Streamlit app'
     shell: bash
     run: |
-        snow streamlit deploy --replace
+        snow streamlit deploy TEST_PROD_STREAMLIT --replace
