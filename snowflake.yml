@@ -1,18 +1,1 @@
 definition_version: 1.1
-entities:
-  my_streamlit:
-    type: streamlit
-    identifier: streamlit_app
-    stage: my_streamlit_stage
-    query_warehouse: my_streamlit_warehouse
-    main_file: streamlit_app.py
-    pages_dir: pages/
-    external_access_integrations:
-      - test_egress
-    secrets:
-      dummy_secret: "db.schema.dummy_secret"
-    imports:
-      - "@my_stage/foo.py"
-    artifacts:
-      - common/hello.py
-      - environment.yml
